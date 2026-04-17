@@ -1,7 +1,10 @@
+#ifndef PE_H
+#define PE_H
+
 #include <string>
 #include <iostream>
 #include <fstream>
-#include "winntdef.h"
+#include <windows.h>
 
 class PE64
 {
@@ -16,7 +19,9 @@ public:
 	{
 		ParseFile();
 	}
-private:
+
+	void* GetAdressData(int adress, int size);
+
 	char* fileName;
 	FILE* PeFile;
 
@@ -33,11 +38,22 @@ private:
 	_IMAGE_OPTIONAL_HEADER PEFILE_OPTIONAL_HEADER;
 	_IMAGE_OPTIONAL_HEADER64 PEFILE_OPTIONAL_HEADER64;
 
+	LONG SECTION_HEADER_ENTRY;
+	LONG NUMBER_OF_SECTIONS;
+	PIMAGE_SECTION_HEADER PEFILE_SECTION_HEADERS;
+private:
+
 	// Parsers
 	void ParseFile();
 
 	void ParseDOS();
 	void ParseFileHeader();
 	void ParseOptionalHeader();
+	void ParseSectionHeader();
+	void ParseImports();
+
+	void* allocatedAdress = nullptr;
 };
+
+#endif // PE_H
 

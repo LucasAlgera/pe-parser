@@ -64,7 +64,7 @@ typedef struct _IMAGE_DATA_DIRECTORY {
 
 
 typedef struct _IMAGE_FILE_HEADER {
-    WORD    Machine;
+    WORD    Machine;                    // wintt.h 19439
     WORD    NumberOfSections;
     DWORD   TimeDateStamp;
     DWORD   PointerToSymbolTable;
